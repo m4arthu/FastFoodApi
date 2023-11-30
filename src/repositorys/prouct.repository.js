@@ -4,7 +4,6 @@ const getProducts = async () => {
   return await prisma.product.findMany({});
 };
 
-
 export const productRepository = {
   getProducts,
 };

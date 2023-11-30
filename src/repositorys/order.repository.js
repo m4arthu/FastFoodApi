@@ -6,6 +6,16 @@ const createOrder = async (data) => {
   });
 };
 
+const updateOrder =  async(data) => {
+  return await prisma.order.update({
+    where: {id:data.orderId},
+    data: {
+      isFinished:Boolean(data.isFinished),
+    }
+  })
+}
+
 export const orderRepository ={
   createOrder,
+  updateOrder
 };
