@@ -1,3 +1,3 @@
 export const notFoundError = (message) =>{
-    return {name: "notFound", message:message}
-}
+  return {name: 'notFound', message: message};
+};

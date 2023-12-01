@@ -5,11 +5,11 @@ const getProducts = async () => {
 };
 
 const getProductById = async (productId) => {
-  return await  prisma.product.findFirst({
-    where:{id:productId}
-  })
-}
+  return await prisma.product.findFirst({
+    where: {id: productId},
+  });
+};
 export const productRepository = {
   getProducts,
-  getProductById
+  getProductById,
 };

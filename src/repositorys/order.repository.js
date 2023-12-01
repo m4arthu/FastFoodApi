@@ -15,14 +15,14 @@ const updateOrder = async (data) => {
   });
 };
 
-const getOrderById =async(orderId) => {
+const getOrderById =async (orderId) => {
   return await prisma.order.findFirst({
-    where:{id: orderId}
-  })
-}
+    where: {id: orderId},
+  });
+};
 
 export const orderRepository ={
   createOrder,
   updateOrder,
-  getOrderById
+  getOrderById,
 };
