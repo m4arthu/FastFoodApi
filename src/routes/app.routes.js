@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { ProductController } from '../controllers/product.controller.js';
-import { orderController } from '../controllers/order.constroller.js';
-import { validateBody } from '../middleweres/validateBody.middlewere.js';
-import { createOrderSchema, updateOrderSchema} from '../schemas/order.schema.js';
+import {Router} from 'express';
+import {ProductController} from '../controllers/product.controller.js';
+import {orderController} from '../controllers/order.constroller.js';
+import {validateBody} from '../middleweres/validateBody.middlewere.js';
+import {createOrderSchema, updateOrderSchema} from '../schemas/order.schema.js';
 
 export const appRoutes = Router();
 

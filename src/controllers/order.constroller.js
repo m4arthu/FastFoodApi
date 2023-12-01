@@ -5,12 +5,12 @@ const createOrder = async (req, res) => {
   return res.status(201).send(order);
 };
 
-const updateOrder = async(req, res) => {
+const updateOrder = async (req, res) => {
   const data = req.body;
   const order = await orderSerivce.updateOrder(data);
   return res.status(201).send(order);
-}
+};
 export const orderController = {
   createOrder,
-  updateOrder
+  updateOrder,
 };
