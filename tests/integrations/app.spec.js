@@ -25,40 +25,60 @@ describe("GET Products", () => {
 
 
 describe("POST Orders", () => {
+    
+    test("shold return 404 when product no found", async () => {
+        const data = {
+            username: "luis",
+            description: "sem cebola",
+            productId: 1
+        }
+        const response = await api.post("/orders").send(data)
+        expect(response.status).toBe(404)
+    });
+    
+    
     test("shold return an order when body is correct", async () => {
         const pruducts = await createProducts(1)
         const data = {
-             username:"luis",
-             description:"sem cebola",
-             productId: pruducts[0].id
-         }
+            username: "luis",
+            description: "sem cebola",
+            productId: pruducts[0].id
+        }
         const response = await api.post("/orders").send(data)
         expect(response.body).toMatchObject({
-            id:expect.any(Number),
-            username:expect.any(String),
-            description:expect.any(String),
-            productId:expect.any(Number),
-            isFinished:false
+            id: expect.any(Number),
+            username: expect.any(String),
+            description: expect.any(String),
+            productId: expect.any(Number),
+            isFinished: false
         });
     })
 })
 
 describe("update Orders", () => {
+    test("shold return 404 when order no found", async () => {
+        const data = {
+            isFinished: true,
+            orderId: 1
+        }
+        const response = await api.put("/orders").send(data)
+        expect(response.status).toBe(404)
+    });
+
     test("shold return an order with isfinished: true when body is correct", async () => {
         const pruducts = await createProducts(1)
-        const order  = await createOrder(pruducts[0].id)
+        const order = await createOrder(pruducts[0].id)
         const data = {
-             isFinished:true,
-             orderId: order.id
-         }
+            isFinished: true,
+            orderId: order.id
+        }
         const response = await api.put("/orders").send(data)
-        console.log(response.text)
         expect(response.body).toMatchObject({
-            id:expect.any(Number),
-            username:expect.any(String),
-            description:expect.any(String),
-            productId:expect.any(Number),
-            isFinished:true
+            id: expect.any(Number),
+            username: expect.any(String),
+            description: expect.any(String),
+            productId: expect.any(Number),
+            isFinished: true
         });
     })
 })

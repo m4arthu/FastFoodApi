@@ -14,6 +14,6 @@ module.exports = {
   "globals": {
     "ts-jest": {
       "useESM": true
-    }
+    },
   }
 };
