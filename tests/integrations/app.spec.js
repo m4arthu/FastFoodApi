@@ -13,12 +13,13 @@ beforeEach(async () => {
 describe("GET Products", () => {
     test("shold return an array  of products", async () => {
         const pruducts = await createProducts(2)
-        const response = await api.get("/")
+        const response = await api.get("/") 
         expect(response.body).toEqual(expect.arrayContaining([{
             description: expect.any(String),
             id: expect.any(Number),
             name: expect.any(String),
             price: expect.any(Number),
+            imageUrl:expect.any(String),
         }]));
     })
 })

@@ -6,7 +6,8 @@ export const createProducts = async (numero) => {
       const data = {
          name: faker.word.adverb(),
          price: faker.number.int(1000, 20000),
-         description: "Muiitoobommm"
+         description: "Muiitoobommm",
+         imageUrl:"../../assets/hamburguer.png"
       }
       const product = await prisma.product.create({ data })
       products.push(product)

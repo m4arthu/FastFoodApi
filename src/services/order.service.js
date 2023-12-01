@@ -5,7 +5,7 @@ import {productRepository} from '../repositorys/prouct.repository.js';
 const createOrder = async (data) => {
   const product = await productRepository.getProductById(data.orderId);
   if (product === null) {
-    throw notFoundError('não foi  possivel achar o pedido');
+    throw notFoundError('não foi  possivel achar o produto');
   }
 
   return await orderRepository.createOrder(data);

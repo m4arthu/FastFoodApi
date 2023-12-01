@@ -5,6 +5,7 @@ async function main() {
         data: {
             name: "hamburguer",
             description: "dawdwad da wdadawda dawd ",
+            imageUrl:"../../assets/hamburguer.png",
             price: 2222
         }
     })
