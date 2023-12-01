@@ -29,6 +29,7 @@ describe("POST Orders", () => {
     test("shold return 404 when product no found", async () => {
         const data = {
             username: "luis",
+            quantity:5,
             description: "sem cebola",
             productId: 1
         }
@@ -42,6 +43,7 @@ describe("POST Orders", () => {
         const data = {
             username: "luis",
             description: "sem cebola",
+            quantity:5,
             productId: pruducts[0].id
         }
         const response = await api.post("/orders").send(data)
@@ -50,6 +52,7 @@ describe("POST Orders", () => {
             username: expect.any(String),
             description: expect.any(String),
             productId: expect.any(Number),
+            quantity: expect.any(Number),
             isFinished: false
         });
     })
@@ -78,6 +81,7 @@ describe("update Orders", () => {
             username: expect.any(String),
             description: expect.any(String),
             productId: expect.any(Number),
+            quantity: expect.any(Number),
             isFinished: true
         });
     })

@@ -7,6 +7,7 @@
     "start": "node ./src/server.js",
     "build": "npx prisma migrate deploy",
     "dev": "npx dotenv -e .env.development  nodemon ./src/server.js",
+    "dev:migrate": "npx dotenv -e .env.development prisma migrate dev",
     "test": "npx dotenv -e .env.test jest",
     "test:coverage": "npx dotenv -e .env.test jest -- --coverage",
     "test:migrate": "npx dotenv -e .env.test prisma migrate dev",

@@ -5,6 +5,7 @@ export const createOrderSchema = Joi.object({
   username: Joi.string().required(),
   productId: Joi.number().integer().required(),
   isFinished: Joi.boolean(),
+  quantity: Joi.number().integer().required(),
   items: Joi.array(),
 });
 export const updateOrderSchema = Joi.object({
