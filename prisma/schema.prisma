@@ -10,6 +10,7 @@ model Product {
   name String @unique
   description String
   price Int
+  imageUrl String
   order Order[]
 }
 
@@ -20,7 +21,6 @@ model Order {
   description String
   productId Int
   quantity Int
-  imageUrl String
   isFinished Boolean @default(false)
   extra Extra[]
 }
