@@ -8,6 +8,7 @@
     "build": "npx prisma migrate deploy",
     "dev": "npx dotenv -e .env.development  nodemon ./src/server.js",
     "test": "npx dotenv -e .env.test jest",
+    "test:coverage": "npx dotenv -e .env.test jest -- --coverage",
     "test:migrate": "npx dotenv -e .env.test prisma migrate dev",
     "prepare": "husky install"
   },
@@ -24,6 +25,7 @@
     "cors": "^2.8.5",
     "dotenv-cli": "^7.3.0",
     "express": "~4.16.1",
+    "express-async-errors": "^3.1.1",
     "http-errors": "~1.6.3",
     "jest": "^29.7.0",
     "joi": "^17.11.0"

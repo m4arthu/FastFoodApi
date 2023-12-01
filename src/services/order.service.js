@@ -1,17 +1,22 @@
+import {notFoundError} from '../errors/app.errors.js';
 import {orderRepository} from '../repositorys/order.repository.js';
+import {productRepository} from '../repositorys/prouct.repository.js';
 
 const createOrder = async (data) => {
-  // verificar se o  produo  existe
-  // se  tiver acomponhamentos fazer a requsição
-  // se não  tiver apenas criar o pedido
+  const product = await productRepository.getProductById(data.orderId);
+  if (product === null) {
+    throw notFoundError('não foi  possivel achar o pedido');
+  }
+
   return await orderRepository.createOrder(data);
 };
 
 const updateOrder = async (data) => {
-  // verificar se o  produo  existe
-  // verificar se a order existe
-  // se  tiver acomponhamentos fazer a requsição
-  // se não  tiver apenas criar o pedido
+  const order = await orderRepository.getOrderById(data.orderId);
+  if (order === null) {
+    throw notFoundError('não foi  possivel achar o pedido');
+  }
+
   return await orderRepository.updateOrder(data);
 };
 
