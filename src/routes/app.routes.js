@@ -11,3 +11,4 @@ appRoutes.post('/orders', validateBody(createOrderSchema),
     orderController.createOrder);
 appRoutes.put('/orders', validateBody(updateOrderSchema),
     orderController.updateOrder);
+appRoutes.get('/orders', orderController.getOrders)
