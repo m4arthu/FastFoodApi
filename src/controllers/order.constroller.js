@@ -10,7 +10,13 @@ const updateOrder = async (req, res) => {
   const order = await orderSerivce.updateOrder(data);
   return res.status(201).send(order);
 };
+
+const getOrders =async (req, res) => {
+  const orders = await orderSerivce.getOrders();
+  res.send(orders);
+};
 export const orderController = {
   createOrder,
   updateOrder,
+  getOrders,
 };
