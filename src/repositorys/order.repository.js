@@ -26,7 +26,19 @@ const getOrderById = async (orderId) => {
 };
 
 const getrOrders = async () => {
-  return await prisma.order.findMany({});
+  return await prisma.order.findMany({
+    include: {
+      OrderProducts: {
+        include: {
+          Products: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
+  });
 };
 
 export const orderRepository = {
