@@ -25,12 +25,12 @@ const getOrderById = async (orderId) => {
 };
 
 const getrOrders = async () => {
-  return await prisma.order.findMany({})
-}
+  return await prisma.order.findMany({});
+};
 
 export const orderRepository = {
   createOrder,
   updateOrder,
   getOrderById,
-  getrOrders
+  getrOrders,
 };

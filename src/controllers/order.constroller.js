@@ -11,12 +11,12 @@ const updateOrder = async (req, res) => {
   return res.status(201).send(order);
 };
 
-const  getOrders =async (req,res) => {
-  const orders = await orderSerivce.getOrders()
-  res.send(orders)
-}
+const getOrders =async (req, res) => {
+  const orders = await orderSerivce.getOrders();
+  res.send(orders);
+};
 export const orderController = {
   createOrder,
   updateOrder,
-  getOrders
+  getOrders,
 };

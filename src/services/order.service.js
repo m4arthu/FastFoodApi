@@ -20,11 +20,11 @@ const updateOrder = async (data) => {
   return await orderRepository.updateOrder(data);
 };
 
-const getOrders = async() => {
-  return await orderRepository.getrOrders()
-}
+const getOrders = async () => {
+  return await orderRepository.getrOrders();
+};
 export const orderSerivce = {
   createOrder,
   updateOrder,
-  getOrders
+  getOrders,
 };
