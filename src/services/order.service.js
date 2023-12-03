@@ -1,15 +1,7 @@
 import {notFoundError} from '../errors/app.errors.js';
 import {orderRepository} from '../repositorys/order.repository.js';
-import {productRepository} from '../repositorys/prouct.repository.js';
 
 const createOrder = async (data) => {
-  data.products.forEach(async (product) => {
-    const productFound = await productRepository.getProductById(product.id);
-    if (productFound === null) {
-      throw notFoundError(`não foi  possivel achar o produto ${product.id}`);
-    }
-  });
-
   return await orderRepository.createOrder(data);
 };
 
@@ -18,7 +10,6 @@ const updateOrder = async (data) => {
   if (order === null) {
     throw notFoundError('não foi  possivel achar o pedido');
   }
-
   return await orderRepository.updateOrder(data);
 };
 

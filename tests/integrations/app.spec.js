@@ -3,6 +3,7 @@ import { ClearDb } from "../utils.js";
 import supertest from "supertest"
 import { app } from "../../src/app.js";
 import { createOrder } from "../factorys/orders.factory.js";
+import { prisma } from "../../prisma/prisma.js";
 
 const api = supertest(app)
 
@@ -13,48 +14,49 @@ beforeEach(async () => {
 describe("GET Products", () => {
     test("shold return an array  of products", async () => {
         const pruducts = await createProducts(2)
-        const response = await api.get("/") 
+        const response = await api.get("/")
         expect(response.body).toEqual(expect.arrayContaining([{
             description: expect.any(String),
             id: expect.any(Number),
             name: expect.any(String),
             price: expect.any(Number),
-            imageUrl:expect.any(String),
+            imageUrl: expect.any(String),
+            bgColor: "red"
         }]));
     })
 })
 
 
 describe("POST Orders", () => {
-    
+
     test("shold return 404 when product no found", async () => {
         const data = {
-            username: "luis",
-            quantity:5,
-            description: "sem cebola",
-            productId: 1
+            username: "luis artthur",
+            products: [{
+                description: "dawdawd",
+                product_id: 1,
+                quantity: 2
+            }]
         }
         const response = await api.post("/orders").send(data)
+        console.log(response.text)
         expect(response.status).toBe(404)
     });
-    
-    
+
+
     test("shold return an order when body is correct", async () => {
         const pruducts = await createProducts(1)
         const data = {
-            username: "luis",
-            description: "sem cebola",
-            quantity:5,
-            productId: pruducts[0].id
+            username: "luis artthur",
+            products: [{
+                description: "dawdawd",
+                product_id: pruducts[0].id,
+                quantity: 2
+            }]
         }
         const response = await api.post("/orders").send(data)
         expect(response.body).toMatchObject({
-            id: expect.any(Number),
-            username: expect.any(String),
-            description: expect.any(String),
-            productId: expect.any(Number),
-            quantity: expect.any(Number),
-            isFinished: false
+            count: 1
         });
     })
 })
@@ -71,7 +73,16 @@ describe("update Orders", () => {
 
     test("shold return an order with isfinished: true when body is correct", async () => {
         const pruducts = await createProducts(1)
-        const order = await createOrder(pruducts[0].id)
+        const productsbody = {
+            username: "luis artthur",
+            products: [{
+                description: "dawdawd",
+                product_id: pruducts[0].id,
+                quantity: 2
+            }]
+        }
+        await createOrder(productsbody)
+        const order = await prisma.order.findFirst({})
         const data = {
             isFinished: true,
             orderId: order.id
@@ -80,9 +91,6 @@ describe("update Orders", () => {
         expect(response.body).toMatchObject({
             id: expect.any(Number),
             username: expect.any(String),
-            description: expect.any(String),
-            productId: expect.any(Number),
-            quantity: expect.any(Number),
             isFinished: true
         });
     })
