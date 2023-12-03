@@ -3,13 +3,13 @@ import Joi from 'joi';
 export const createOrderSchema = Joi.object({
   username: Joi.string().required(),
   products: Joi.array().items(
-    Joi.object({
-      description: Joi.string().required(),
-      product_id: Joi.number().integer().required(),
-      quantity: Joi.number().integer().required()
-    }).required()
+      Joi.object({
+        description: Joi.string().required(),
+        product_id: Joi.number().integer().required(),
+        quantity: Joi.number().integer().required(),
+      }).required(),
   ).required(),
-  isFinished: Joi.boolean()
+  isFinished: Joi.boolean(),
 });
 
 export const updateOrderSchema = Joi.object({
