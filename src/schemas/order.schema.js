@@ -1,13 +1,17 @@
 import Joi from 'joi';
 
 export const createOrderSchema = Joi.object({
-  description: Joi.string().required(),
   username: Joi.string().required(),
-  productId: Joi.number().integer().required(),
-  isFinished: Joi.boolean(),
-  quantity: Joi.number().integer().required(),
-  items: Joi.array(),
+  products: Joi.array().items(
+    Joi.object({
+      description: Joi.string().required(),
+      product_id: Joi.number().integer().required(),
+      quantity: Joi.number().integer().required()
+    }).required()
+  ).required(),
+  isFinished: Joi.boolean()
 });
+
 export const updateOrderSchema = Joi.object({
   isFinished: Joi.boolean().required(),
   orderId: Joi.number().integer().required(),

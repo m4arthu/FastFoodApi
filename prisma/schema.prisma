@@ -11,20 +11,34 @@ model Product {
   description String
   price Int
   imageUrl String
-  order Order[]
+  bgColor Color
+  OrderProducts OrderProducts[]
+}
+
+model OrderProducts {
+  id Int @id @default(autoincrement())
+  Products Product @relation(fields: [product_id],references: [id])
+  order Order @relation(fields: [order_id],references: [id])
+  description String
+  quantity Int
+  product_id Int
+  order_id Int
 }
 
 model Order {
   id Int @id @default(autoincrement())
   username String
-  product Product @relation(fields: [productId],references: [id])
-  description String
-  productId Int
-  quantity Int
+  OrderProducts OrderProducts[]
   isFinished Boolean @default(false)
   extra Extra[]
+
 }
 
+enum Color {
+  yellow
+  green
+  red
+}
 model Extra {
   id Int @id @default(autoincrement())
   ProductId Int
