@@ -3,10 +3,12 @@ import {orderRepository} from '../repositorys/order.repository.js';
 import {productRepository} from '../repositorys/prouct.repository.js';
 
 const createOrder = async (data) => {
-  const product = await productRepository.getProductById(data.orderId);
-  if (product === null) {
-    throw notFoundError('não foi  possivel achar o produto');
-  }
+  data.products.forEach(async (product) => {
+    const productFound = await productRepository.getProductById(product.id);
+    if (productFound === null) {
+      throw notFoundError(`não foi  possivel achar o produto ${product.id}`);
+    }
+  });
 
   return await orderRepository.createOrder(data);
 };
