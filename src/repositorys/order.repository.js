@@ -1,9 +1,9 @@
-import {prisma} from '../../prisma/prisma.js';
+import { prisma } from '../../prisma/prisma.js';
 
 const createOrder = async (data) => {
-  const order = await prisma.order.create({data: {username: data.username}});
+  const order = await prisma.order.create({ data: { username: data.username } });
   const orderData = data.products.map((product) => {
-    return {...product, order_id: order.id};
+    return { ...product, order_id: order.id };
   });
   return await prisma.orderProducts.createMany({
     data: orderData,
@@ -12,7 +12,7 @@ const createOrder = async (data) => {
 
 const updateOrder = async (data) => {
   return await prisma.order.update({
-    where: {id: data.orderId},
+    where: { id: data.orderId },
     data: {
       isFinished: Boolean(data.isFinished),
     },
@@ -21,12 +21,24 @@ const updateOrder = async (data) => {
 
 const getOrderById = async (orderId) => {
   return await prisma.order.findFirst({
-    where: {id: orderId},
+    where: { id: orderId },
   });
 };
 
 const getrOrders = async () => {
-  return await prisma.order.findMany({});
+  return await prisma.order.findMany({
+    include: {
+      OrderProducts: {
+        include: {
+          Products: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
+  })
 };
 
 export const orderRepository = {
