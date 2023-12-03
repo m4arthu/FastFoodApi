@@ -1,5 +1,5 @@
-import { notFoundError } from '../errors/app.errors.js';
-import { orderRepository } from '../repositorys/order.repository.js';
+import {notFoundError} from '../errors/app.errors.js';
+import {orderRepository} from '../repositorys/order.repository.js';
 
 const createOrder = async (data) => {
   return await orderRepository.createOrder(data);
