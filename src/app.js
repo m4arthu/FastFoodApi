@@ -1,7 +1,7 @@
 import express, {json} from 'express';
 import 'express-async-errors';
 import cors from 'cors';
-import sweagerUI from "swagger-ui-express"
+import sweagerUI from 'swagger-ui-express';
 import {appRoutes} from './routes/app.routes.js';
 import {errorHandler} from './middleweres/errorHandler.middlewere.js';
 import swaggerJson from '../sweagger.json' assert { type: 'json' };
