@@ -16,12 +16,12 @@ const updateOrder = async (data) => {
 const getOrders = async () => {
   return await orderRepository.getrOrders();
 };
-const deleteOrder =async(orderId) => {
-  return await orderRepository.deleteOrder(orderId)
-}
+const deleteOrder =async (orderId) => {
+  return await orderRepository.deleteOrder(orderId);
+};
 export const orderSerivce = {
   createOrder,
   updateOrder,
   getOrders,
-  deleteOrder
+  deleteOrder,
 };
