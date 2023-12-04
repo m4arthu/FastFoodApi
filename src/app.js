@@ -4,7 +4,6 @@ import cors from 'cors';
 import sweagerUI from "swagger-ui-express"
 import {appRoutes} from './routes/app.routes.js';
 import {errorHandler} from './middleweres/errorHandler.middlewere.js';
-// eslint-disable-next-line
 import swaggerJson from '../sweagger.json' assert { type: 'json' };
 
 
