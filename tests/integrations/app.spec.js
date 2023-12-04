@@ -4,6 +4,7 @@ import supertest from "supertest";
 import { app } from "../../src/app.js";
 import { createOrder } from "../factorys/orders.factory.js";
 import { prisma } from "../../prisma/prisma.js";
+import { boolean, string } from "joi";
 
 const api = supertest(app)
 
@@ -58,6 +59,13 @@ describe("POST Orders", () => {
         expect(response.body).toMatchObject({
             count: 1
         });
+        // side efects
+        const orderCreated = await prisma.order.findFirst({})
+        expect(orderCreated).toMatchObject({
+            id: expect.any(Number),
+            username: expect.any(String),
+            isFinished: expect.any(Boolean)
+        });
     })
 })
 
@@ -93,21 +101,28 @@ describe("update Orders", () => {
             username: expect.any(String),
             isFinished: true
         });
+        const orderCreated = await prisma.order.findFirst({})
+        expect(orderCreated).toMatchObject({
+            id: expect.any(Number),
+            username: expect.any(String),
+            isFinished: true
+        });
     })
 
-    test("shold return 204 when order  deleted", async () => {
-        const pruducts = await createProducts(1)
-        const productsbody = {
-            username: "luis artthur",
-            products: [{
-                description: "dawdawd",
-                product_id: pruducts[0].id,
-                quantity: 2
-            }]
-        }
-        await createOrder(productsbody)
-        const order = await prisma.order.findFirst({})
-        const response = await api.delete(`/orders/${order.id}`)
-        expect(response.status).toBe(204)
-    });
 })
+
+test("shold return 204 when order  deleted", async () => {
+    const pruducts = await createProducts(1)
+    const productsbody = {
+        username: "luis artthur",
+        products: [{
+            description: "dawdawd",
+            product_id: pruducts[0].id,
+            quantity: 2
+        }]
+    }
+    await createOrder(productsbody)
+    const order = await prisma.order.findFirst({})
+    const response = await api.delete(`/orders/${order.id}`)
+    expect(response.status).toBe(204)
+});
