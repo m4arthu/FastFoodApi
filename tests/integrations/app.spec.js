@@ -1,6 +1,6 @@
 import { createProducts } from "../factorys/products.factory.js";
 import { ClearDb } from "../utils.js";
-import supertest from "supertest"
+import supertest from "supertest";
 import { app } from "../../src/app.js";
 import { createOrder } from "../factorys/orders.factory.js";
 import { prisma } from "../../prisma/prisma.js";
@@ -94,4 +94,20 @@ describe("update Orders", () => {
             isFinished: true
         });
     })
+
+    test("shold return 204 when order  deleted", async () => {
+        const pruducts = await createProducts(1)
+        const productsbody = {
+            username: "luis artthur",
+            products: [{
+                description: "dawdawd",
+                product_id: pruducts[0].id,
+                quantity: 2
+            }]
+        }
+        await createOrder(productsbody)
+        const order = await prisma.order.findFirst({})
+        const response = await api.delete(`/orders/${order.id}`)
+        expect(response.status).toBe(204)
+    });
 })

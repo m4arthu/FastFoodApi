@@ -41,9 +41,19 @@ const getrOrders = async () => {
   });
 };
 
+const deleteOrder = async (orderId) => {
+  await prisma.orderProducts.deleteMany({
+    where: {order_id: orderId},
+  });
+  await prisma.order.delete({
+    where: {id: orderId},
+  });
+};
+
 export const orderRepository = {
   createOrder,
   updateOrder,
   getOrderById,
   getrOrders,
+  deleteOrder,
 };

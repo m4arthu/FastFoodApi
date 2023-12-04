@@ -15,8 +15,15 @@ const getOrders =async (req, res) => {
   const orders = await orderSerivce.getOrders();
   res.send(orders);
 };
+
+const deleteOrder = async (req, res) => {
+  const orderId = req.params.id;
+  await orderSerivce.deleteOrder(Number(orderId));
+  res.status(204).send();
+};
 export const orderController = {
   createOrder,
   updateOrder,
   getOrders,
+  deleteOrder,
 };

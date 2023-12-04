@@ -12,3 +12,4 @@ appRoutes.post('/orders', validateBody(createOrderSchema),
 appRoutes.put('/orders', validateBody(updateOrderSchema),
     orderController.updateOrder);
 appRoutes.get('/orders', orderController.getOrders);
+appRoutes.delete('/orders/:id', orderController.deleteOrder);
