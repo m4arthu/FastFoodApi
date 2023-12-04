@@ -43,6 +43,18 @@ https://fastfoodapi-w11n.onrender.com/api-docs
   PORT = numero da porta desejada
   ``````
 
+  # Como rodar os testes
+ - crie um  arquivo  .env.test seguindo  as mesmas  instruções do  bloco  anterior como  rodar
+ - va para app.js  em src/app.js  e comente as linhas 7  e  14 pois o  compilador babel  não consegue  converter  um  assert
+   ![image](https://github.com/m4arthu/FastFoodApi/assets/102080715/baaca3d2-9d93-43f4-a667-05f231d7af40)
+- pronto  agora você pode rodar :
+  ``````powershell
+  npm run  test
+  ``````
+
+
+
+
 
 
 
