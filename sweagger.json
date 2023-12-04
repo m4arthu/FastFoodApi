@@ -1,0 +1,141 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "FastFoodApi",
+        "description": "Documentation form FastFoodApi api",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "return  an  array  of products"
+                    }
+                }
+            }
+        },
+        "/orders": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "return  an  array  of orders"
+                    }
+                }
+            },
+            "post": {
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "username",
+                                    "products"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "Luis Arthur"
+                                    },
+                                    "products": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "description": {
+                                                    "type": "string"
+                                                },
+                                                "product_id": {
+                                                    "type": "number"
+                                                },
+                                                "quantity": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "example": {
+                                                "description": "sem cebola",
+                                                "product_id": 12,
+                                                "quantity": 2
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "return a order if values of body is  correct"
+                    },
+                    "422": {
+                        "description": "return 422 if  body is invalid"
+                    },
+                    "404": {
+                        "description": "return 404 if product not found"
+                    }
+                }
+            },
+            "put": {
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "orderId",
+                                    "isFinished"
+                                ],
+                                "properties": {
+                                    "orderId": {
+                                        "type": "number"
+                                    },
+                                    "isFinished": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "return a order with propetie is Finished true if values of body is  correct"
+                    },
+                    "422": {
+                        "description": "return 422 if  body is invalid"
+                    },
+                    "404": {
+                        "description": "return 404 if order not found"
+                    }
+                }
+            }
+        },
+        "/orders/{id}": {
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "return id order is deleted"
+                    },
+                    "404": {
+                        "description": "return 404 if order not found"
+                    }
+                }
+            }
+        }
+    }
+}
